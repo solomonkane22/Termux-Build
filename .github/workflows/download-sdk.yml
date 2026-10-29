@@ -13,8 +13,10 @@ jobs:
           cd sdk_files
           
           echo "android.jar indiriliyor..."
-          # Maven Central üzerinden çalışan resmi ve doğrudan indirme bağlantısı
-          wget --content-disposition "https://search.maven.org/remotecontent?filepath=com/google/android/android/13/android-13.jar" -O android.jar
+          # Doğrudan çalışan GitHub raw yansı deposu
+          wget -O android.jar "https://github.com/SovereignCrypt/android-jar-files/raw/main/android-33/android.jar" || \
+          wget -O android.jar "https://gitlab.com/snippets/2115123/raw" || \
+          curl -L -o android.jar "https://github.com/itsndk/android-jar/raw/master/android-33/android.jar"
           
           echo "framework.aidl indiriliyor..."
           wget -O framework.aidl "https://raw.githubusercontent.com/android/platform_frameworks_base/master/core/res/framework.aidl"
