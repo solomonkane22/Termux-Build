@@ -13,13 +13,13 @@ jobs:
           cd sdk_files
           
           echo "android.jar indiriliyor..."
-          # wget kullanarak yönlendirmeleri tam takip eden ve dosya çeken güvenli komut
-          wget -O android.jar "https://github.com/itsndk/android-jar/raw/master/android-33/android.jar"
+          # Maven Central üzerinden çalışan resmi ve doğrudan indirme bağlantısı
+          wget --content-disposition "https://search.maven.org/remotecontent?filepath=com/google/android/android/13/android-13.jar" -O android.jar
           
           echo "framework.aidl indiriliyor..."
           wget -O framework.aidl "https://raw.githubusercontent.com/android/platform_frameworks_base/master/core/res/framework.aidl"
           
-          # İnen dosyaların boyutlarını kontrol et
+          # Dosya boyutlarını kontrol et
           ls -lh
 
       - name: Dosyaları Arşivle (Artifact)
