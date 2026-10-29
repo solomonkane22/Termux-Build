@@ -1,7 +1,7 @@
-name: Android SDK İndirici
+name: Android SDK İndirici (Kesin Çözüm)
 
 on:
-  workflow_dispatch: # Manuel olarak butona basınca çalışır
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,10 +11,16 @@ jobs:
         run: |
           mkdir -p sdk_files
           cd sdk_files
-          # Android.jar dosyasını resmi Maven deposundan indir
-          curl -L -o android.jar "https://repo1.maven.org/maven2/com/google/android/android/13/android-13.jar"
-          # Framework.aidl dosyasını indir
-          curl -L -o framework.aidl "https://raw.githubusercontent.com/android/platform_frameworks_base/master/core/res/framework.aidl"
+          
+          echo "android.jar indiriliyor..."
+          # wget kullanarak yönlendirmeleri tam takip eden ve dosya çeken güvenli komut
+          wget -O android.jar "https://github.com/itsndk/android-jar/raw/master/android-33/android.jar"
+          
+          echo "framework.aidl indiriliyor..."
+          wget -O framework.aidl "https://raw.githubusercontent.com/android/platform_frameworks_base/master/core/res/framework.aidl"
+          
+          # İnen dosyaların boyutlarını kontrol et
+          ls -lh
 
       - name: Dosyaları Arşivle (Artifact)
         uses: actions/upload-artifact@v4
