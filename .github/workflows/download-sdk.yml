@@ -1,0 +1,23 @@
+name: Android SDK İndirici
+
+on:
+  workflow_dispatch: # Manuel olarak butona basınca çalışır
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Android.jar ve Framework.aidl İndir
+        run: |
+          mkdir -p sdk_files
+          cd sdk_files
+          # Android.jar dosyasını resmi Maven deposundan indir
+          curl -L -o android.jar "https://repo1.maven.org/maven2/com/google/android/android/13/android-13.jar"
+          # Framework.aidl dosyasını indir
+          curl -L -o framework.aidl "https://raw.githubusercontent.com/android/platform_frameworks_base/master/core/res/framework.aidl"
+
+      - name: Dosyaları Arşivle (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AideSDK-Files
+          path: sdk_files/
